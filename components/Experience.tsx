@@ -25,9 +25,9 @@ export default function Experience() {
         <SectionHeader icon={Briefcase} label="Experience" />
       </AnimatedSection>
       <div className="relative pl-6 md:pl-8">
-        {/* Timeline vertical line */}
+        {/* Timeline vertical line - centered through logos */}
         {experience.length > 0 && (
-          <div className="absolute left-0 top-5 bottom-5 w-0.5 bg-gray-200" aria-hidden="true" />
+          <div className="absolute left-[-5px] md:left-[-13px] top-5 bottom-5 w-0.5 bg-gray-200" aria-hidden="true" />
         )}
         
         <div className="space-y-4">

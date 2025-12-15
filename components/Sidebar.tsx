@@ -274,7 +274,7 @@ export default function Sidebar() {
                 {/* Download CV Button */}
                 <a
                   href={personalInfo.cvGoogleDocId 
-                    ? `https://docs.google.com/document/d/${personalInfo.cvGoogleDocId}/export?format=pdf`
+                    ? "/api/cv"
                     : "/cv.pdf"}
                   download="CV.pdf"
                   className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-black text-white rounded-lg font-medium transition-all hover:bg-gray-800 active:scale-95 shadow-sm text-sm min-h-[44px]"
@@ -420,7 +420,7 @@ export default function Sidebar() {
         >
           <a
             href={personalInfo.cvGoogleDocId 
-              ? `https://docs.google.com/document/d/${personalInfo.cvGoogleDocId}/export?format=pdf`
+              ? "/api/cv"
               : "/cv.pdf"}
             download="CV.pdf"
             className="flex items-center justify-center gap-2 w-full px-6 py-3 sm:py-2.5 bg-black text-white rounded-lg font-medium transition-all hover:bg-gray-800 active:scale-95 shadow-sm text-sm min-h-[44px] sm:min-h-0"
