@@ -7,16 +7,12 @@ import Education from "@/components/Education";
 import Publications from "@/components/Publications";
 import Recognition from "@/components/Recognition";
 import BackToTop from "@/components/BackToTop";
-import MobileNav from "@/components/MobileNav";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50/50">
       {/* Left Sidebar - Fixed on desktop */}
       <Sidebar />
-      
-      {/* Mobile Navigation */}
-      <MobileNav />
       
       {/* Back to Top Button */}
       <BackToTop />
