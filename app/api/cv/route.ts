@@ -58,8 +58,11 @@ export async function GET(request: NextRequest) {
     const modifiedPdfBytes = await newPdf.save();
     console.log('Modified PDF size:', modifiedPdfBytes.length, 'bytes');
     
+    // Convert Uint8Array to Buffer for NextResponse compatibility
+    const pdfBuffer = Buffer.from(modifiedPdfBytes);
+    
     // Return the PDF with appropriate headers
-    return new NextResponse(modifiedPdfBytes, {
+    return new NextResponse(pdfBuffer, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',

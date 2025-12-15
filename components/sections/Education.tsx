@@ -1,9 +1,9 @@
 "use client";
 
 import { education } from "@/data/content";
-import AnimatedSection from "./AnimatedSection";
-import SectionHeader from "./ui/SectionHeader";
-import ExpandableCard from "./ExpandableCard";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import SectionHeader from "@/components/ui/SectionHeader";
+import ExpandableCard from "@/components/ui/ExpandableCard";
 import { GraduationCap } from "lucide-react";
 
 export default function Education() {

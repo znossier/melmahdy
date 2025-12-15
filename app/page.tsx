@@ -1,12 +1,12 @@
-import Sidebar from "@/components/Sidebar";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
-import TechStack from "@/components/TechStack";
-import Education from "@/components/Education";
-import Publications from "@/components/Publications";
-import Recognition from "@/components/Recognition";
-import BackToTop from "@/components/BackToTop";
+import Sidebar from "@/components/navigation/Sidebar";
+import About from "@/components/sections/About";
+import Skills from "@/components/sections/Skills";
+import Experience from "@/components/sections/Experience";
+import TechStack from "@/components/sections/TechStack";
+import Education from "@/components/sections/Education";
+import Publications from "@/components/sections/Publications";
+import Recognition from "@/components/sections/Recognition";
+import BackToTop from "@/components/navigation/BackToTop";
 
 export default function Home() {
   return (

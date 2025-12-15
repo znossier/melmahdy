@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "./ui/Logo";
+import Logo from "./Logo";
 
 interface ExpandableCardProps {
   logo: string;

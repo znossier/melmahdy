@@ -1,6 +1,6 @@
 "use client";
 
-import AnimatedSection from "./AnimatedSection";
+import AnimatedSection from "./ui/AnimatedSection";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();

@@ -1,8 +1,8 @@
 "use client";
 
 import { recognition } from "@/data/content";
-import AnimatedSection from "./AnimatedSection";
-import SectionHeader from "./ui/SectionHeader";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { Award } from "lucide-react";
 
 export default function Recognition() {

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { techStack } from "@/data/content";
-import AnimatedSection from "./AnimatedSection";
-import SectionHeader from "./ui/SectionHeader";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { Layers } from "lucide-react";
 
 export default function TechStack() {

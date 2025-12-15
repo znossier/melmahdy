@@ -1,8 +1,8 @@
 "use client";
 
 import { publications } from "@/data/content";
-import AnimatedSection from "./AnimatedSection";
-import SectionHeader from "./ui/SectionHeader";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { BookOpen, ExternalLink, Calendar, Building2, MapPin, Users } from "lucide-react";
 
 // Helper function to get accent color based on year

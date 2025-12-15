@@ -1,7 +1,7 @@
 "use client";
 
 import { personalInfo } from "@/data/content";
-import AnimatedSection from "./AnimatedSection";
+import AnimatedSection from "./ui/AnimatedSection";
 
 export default function Hero() {
   return (

@@ -1,8 +1,8 @@
 "use client";
 
 import { skillCategories } from "@/data/content";
-import AnimatedSection from "./AnimatedSection";
-import SectionHeader from "./ui/SectionHeader";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { Code } from "lucide-react";
 import Image from "next/image";
 

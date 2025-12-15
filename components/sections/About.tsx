@@ -1,8 +1,8 @@
 "use client";
 
 import { about } from "@/data/content";
-import AnimatedSection from "./AnimatedSection";
-import SectionHeader from "./ui/SectionHeader";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { User } from "lucide-react";
 
 export default function About() {

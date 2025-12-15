@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { experience } from "@/data/content";
-import AnimatedSection from "./AnimatedSection";
-import SectionHeader from "./ui/SectionHeader";
-import Logo from "./ui/Logo";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Logo from "@/components/ui/Logo";
 import { Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 

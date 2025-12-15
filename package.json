@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "setup-auto-push": "bash setup-auto-push.sh"
+    "setup-auto-push": "bash scripts/setup-auto-push.sh"
   },
   "dependencies": {
     "framer-motion": "^12.23.26",
