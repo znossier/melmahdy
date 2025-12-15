@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Moustafa El Mahdy - Data Scientist",
     description: "Data Scientist portfolio website for Moustafa El Mahdy. Specializing in analytics, machine learning, and data engineering.",
+    // TODO: Update this URL after deployment - use Vercel deployment URL initially, then custom domain when configured
     url: "https://moustafaelmahdy.com",
     siteName: "Moustafa El Mahdy Portfolio",
     locale: "en_US",
