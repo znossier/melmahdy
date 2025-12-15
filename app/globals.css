@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f9fafb;
+  --foreground: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Responsive root font size - scales from 14px to 16px */
+  font-size: clamp(14px, 0.35vw + 13px, 16px);
+  /* Smooth scroll with offset for fixed headers */
+  scroll-padding-top: 100px;
+  /* Prevent scroll chaining issues - removed on mobile to fix scrolling */
+  overscroll-behavior-y: auto;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+button {
+  transition: all 0.2s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  /* Ensure touch scrolling works on mobile */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+/* Subtle pulsing ring animation for live status indicator */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.8);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Typography Utility Classes */
+@layer utilities {
+  /* Display text - for hero headings */
+  .text-display {
+    @apply text-display;
+  }
+
+  /* Heading utilities */
+  .text-h1 {
+    @apply text-h1;
+  }
+
+  .text-h2 {
+    @apply text-h2;
+  }
+
+  .text-h3 {
+    @apply text-h3;
+  }
+
+  .text-h4 {
+    @apply text-h4;
+  }
+
+  /* Body text */
+  .text-body {
+    @apply text-body;
+  }
+
+  /* Small text */
+  .text-small {
+    @apply text-small;
+  }
+
+  /* Caption text */
+  .text-caption {
+    @apply text-caption;
+  }
+
+  /* Section label - uppercase, tracking-wide */
+  .text-section-label {
+    @apply text-caption uppercase tracking-wider font-semibold;
+  }
+}
+
+
+/* Infinite scrolling carousel animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 12s linear infinite;
+}
+
+.animate-scroll-slow {
+  animation: scroll 40s linear infinite;
+}
+
+/* Rounded stroke cap border */
+.border-l-rounded {
+  position: relative;
+  padding-left: 1rem;
+}
+
+@media (min-width: 768px) {
+  .border-l-rounded {
+    padding-left: 1.25rem;
+  }
+}
+
+.border-l-rounded::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: rgb(34 197 94); /* green-500 */
+  border-radius: 2px;
+}
