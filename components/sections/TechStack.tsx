@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { Layers } from "lucide-react";
+
 import { techStack } from "@/data/content";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { Layers } from "lucide-react";
-import { spacing, colors, borderRadius, typography } from "@/lib/constants/design";
 
 export default function TechStack() {
 
@@ -39,7 +39,7 @@ export default function TechStack() {
     return (
       <div className="relative">
         <div
-          className={`w-16 h-16 sm:w-20 sm:h-20 ${borderRadius.card} flex items-center justify-center ${colors.background.primary} border ${colors.border.default} shadow-sm relative overflow-hidden flex-shrink-0`}
+          className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center bg-white border border-gray-200 shadow-sm relative overflow-hidden flex-shrink-0"
         >
           <Image
             src={logoPath}
@@ -66,7 +66,7 @@ export default function TechStack() {
   };
 
   return (
-    <section id="tech-stack" className={`${spacing.section.marginBottom} ${spacing.section.scrollMargin}`} aria-label="Tech Stack">
+    <section id="tech-stack" className="mb-12 md:mb-16 scroll-mt-24" aria-label="Tech Stack">
       <AnimatedSection>
         <SectionHeader icon={Layers} label="Tech Stack" />
       </AnimatedSection>
@@ -82,7 +82,7 @@ export default function TechStack() {
             {techStack.map((tech, index) => (
               <div key={`first-${index}`} className="flex flex-col items-center flex-shrink-0">
                 {getTechLogo(tech.logo, tech.name)}
-                <span className={`mt-2 ${typography.body.tiny} ${colors.text.tertiary} ${typography.weight.medium} text-center leading-tight whitespace-nowrap`}>
+                <span className="mt-2 text-xs text-gray-600 font-medium text-center leading-tight whitespace-nowrap">
                   {tech.name}
                 </span>
               </div>
@@ -94,7 +94,7 @@ export default function TechStack() {
             {techStack.map((tech, index) => (
               <div key={`second-${index}`} className="flex flex-col items-center flex-shrink-0">
                 {getTechLogo(tech.logo, tech.name)}
-                <span className={`mt-2 ${typography.body.tiny} ${colors.text.tertiary} ${typography.weight.medium} text-center leading-tight whitespace-nowrap`}>
+                <span className="mt-2 text-xs text-gray-600 font-medium text-center leading-tight whitespace-nowrap">
                   {tech.name}
                 </span>
               </div>

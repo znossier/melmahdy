@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import { getLogoPath, getLogoStyle } from "@/lib/utils/logo";
 
 interface LogoProps {
