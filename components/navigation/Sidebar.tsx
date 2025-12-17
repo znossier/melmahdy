@@ -177,7 +177,8 @@ export default function Sidebar() {
 
         {/* Profile section - horizontal layout: image left, text right */}
         <motion.div
-          className="flex items-start flex-row gap-3"
+          className="flex items-start flex-row gap-4"
+          style={{ verticalAlign: "middle", height: "100%" }}
           transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         >
           {/* Avatar - grows when expanded, always on left */}
@@ -200,11 +201,11 @@ export default function Sidebar() {
           </motion.div>
 
           {/* Text section - always on right, with padding to avoid button overlap */}
-          <div className={`flex-1 min-w-0 text-left ${isOpen ? "pr-12" : "pr-0"}`}>
-            <h1 className={`font-bold leading-tight transition-none break-words ${isOpen ? "text-lg" : "text-sm"}`}>
+          <div className={`flex-1 min-w-0 text-left ${isOpen ? "pr-12" : "pr-0"}`} style={{ verticalAlign: "middle", height: "100%" }}>
+            <h1 className={`font-bold leading-tight transition-none break-words ${isOpen ? "text-lg" : "text-sm"}`} style={{ height: "fit-content" }}>
               Hello, I&apos;m {personalInfo.name}.
             </h1>
-            <p className={`font-medium text-gray-800 transition-none ${isOpen ? "text-sm mt-0.5" : "text-xs"}`}>
+            <p className={`font-medium text-gray-800 transition-none ${isOpen ? "text-sm mt-0.5" : "text-xs"}`} style={{ height: "fit-content" }}>
               {personalInfo.title}
             </p>
             
