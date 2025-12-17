@@ -22,7 +22,7 @@ export default function Home() {
       
       {/* Right Content Column - Properly spaced for fixed sidebar */}
       <div className="md:ml-96 lg:ml-[28rem]">
-        <div className="max-w-4xl mx-auto px-8 sm:px-12 md:px-16 lg:px-24 xl:px-32 py-6 sm:py-8 md:py-12 lg:py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-16 lg:px-24 xl:px-32 py-4 sm:py-6 md:py-12 lg:py-16">
           {/* About Section */}
           <About />
           

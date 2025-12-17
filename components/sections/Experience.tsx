@@ -28,7 +28,20 @@ export default function Experience() {
       <div className="relative pl-6 md:pl-8">
         {/* Timeline vertical line - centered through logos */}
         {experience.length > 0 && (
-          <div className="absolute left-[-5px] md:left-[-13px] top-5 bottom-5 w-0.5 bg-gray-200" aria-hidden="true" />
+          <>
+            {/* Mobile line - centered through logos */}
+            <div 
+              className="absolute md:hidden top-5 bottom-5 w-0.5 bg-gray-200" 
+              aria-hidden="true"
+              style={{ left: '13.64px' }}
+            />
+            {/* Desktop line - centered through logos */}
+            <div 
+              className="hidden md:block absolute top-5 bottom-5 w-0.5 bg-gray-200" 
+              aria-hidden="true"
+              style={{ left: '17.75px' }}
+            />
+          </>
         )}
         
         <div className="space-y-4">
@@ -47,7 +60,7 @@ export default function Experience() {
                   <div className="ml-6 md:ml-8">
                     <div 
                       className={`bg-white/50 border border-gray-100 rounded-xl p-4 md:p-5 transition-all relative ${
-                        hasExpandableContent ? 'cursor-pointer hover:bg-white/80 hover:border-gray-200' : ''
+                        hasExpandableContent ? 'cursor-pointer active:bg-white/80 active:border-gray-200 touch-manipulation' : ''
                       }`}
                       onClick={() => hasExpandableContent && setExpandedIndex(isExpanded ? null : index)}
                       role={hasExpandableContent ? "button" : undefined}
@@ -92,7 +105,7 @@ export default function Experience() {
                                 e.stopPropagation();
                                 setExpandedIndex(isExpanded ? null : index);
                               }}
-                              className="flex items-center gap-1.5 text-gray-500 hover:text-gray-700 transition-colors px-2 py-1.5 text-xs font-medium flex-shrink-0"
+                              className="flex items-center gap-1.5 text-gray-500 active:text-gray-700 transition-colors px-2 py-1.5 text-xs font-medium flex-shrink-0 min-h-[32px] touch-manipulation"
                               aria-label={isExpanded ? "Collapse details" : "Expand details"}
                             >
                               {isExpanded ? (

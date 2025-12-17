@@ -39,8 +39,8 @@ export default function ExpandableCard({
       className={`rounded-xl border p-4 sm:p-5 transition-all relative ${
         isHighlighted
           ? "border-blue-400 bg-blue-50/50 shadow-sm"
-          : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"
-      } ${hasExpandableContent ? "cursor-pointer" : ""}`}
+          : "border-gray-200 bg-white active:border-gray-300 active:shadow-sm"
+      } ${hasExpandableContent ? "cursor-pointer touch-manipulation" : ""}`}
       onClick={() => hasExpandableContent && setIsExpanded(!isExpanded)}
       role={hasExpandableContent ? "button" : undefined}
       aria-expanded={hasExpandableContent ? isExpanded : undefined}
@@ -79,7 +79,7 @@ export default function ExpandableCard({
                   e.stopPropagation();
                   setIsExpanded(!isExpanded);
                 }}
-                className="flex items-center gap-1.5 text-gray-500 hover:text-gray-700 transition-colors px-2 py-1.5 text-xs font-medium flex-shrink-0"
+                className="flex items-center gap-1.5 text-gray-500 active:text-gray-700 transition-colors px-2 py-1.5 text-xs font-medium flex-shrink-0 min-h-[32px] touch-manipulation"
                 aria-label={isExpanded ? "Collapse details" : "Expand details"}
               >
                 {isExpanded ? (

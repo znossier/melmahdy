@@ -17,10 +17,16 @@ html {
   scroll-behavior: smooth;
   /* Responsive root font size - scales from 14px to 16px */
   font-size: clamp(14px, 0.35vw + 13px, 16px);
-  /* Smooth scroll with offset for fixed headers */
-  scroll-padding-top: 100px;
+  /* Smooth scroll with offset for fixed headers - smaller on mobile */
+  scroll-padding-top: 80px;
   /* Prevent scroll chaining issues - removed on mobile to fix scrolling */
   overscroll-behavior-y: auto;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 100px;
+  }
 }
 
 body {
@@ -68,6 +74,22 @@ body {
   /* Ensure touch scrolling works on mobile */
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
+}
+
+/* Improve touch targets and interactions on mobile */
+@media (max-width: 767px) {
+  button,
+  a,
+  [role="button"] {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Better text rendering on mobile */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 }
 
 /* Subtle pulsing ring animation for live status indicator */

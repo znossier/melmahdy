@@ -13,7 +13,7 @@ export default function About() {
         <SectionHeader icon={User} label="About" />
       </AnimatedSection>
       <AnimatedSection delay={0.1}>
-        <p className="text-sm sm:text-base leading-relaxed sm:leading-relaxed text-gray-700 max-w-3xl break-words">
+        <p className="text-sm sm:text-base leading-relaxed text-gray-700 max-w-3xl break-words">
           {about}
         </p>
       </AnimatedSection>

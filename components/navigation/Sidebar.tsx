@@ -156,16 +156,16 @@ export default function Sidebar() {
     return (
       <div 
         ref={headerRef}
-        className="md:hidden bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-50"
+        className="md:hidden bg-white/95 backdrop-blur-sm border-b border-gray-200/80 fixed top-0 left-0 right-0 z-50 shadow-sm"
       >
       <motion.div
-        className={`bg-gradient-to-br from-blue-50/40 via-white to-blue-50/20 rounded-3xl m-3 border border-gray-200/60 shadow-lg overflow-hidden relative ${isOpen ? "p-6" : "p-3"}`}
+        className={`bg-gradient-to-br from-blue-50/40 via-white to-blue-50/20 rounded-2xl mx-2.5 mt-2 mb-2 border border-gray-200/60 shadow-md overflow-hidden relative ${isOpen ? "p-5" : "p-2.5"}`}
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
       >
         {/* Menu/Close button - positioned relative to card */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute top-3 right-3 p-2 hover:bg-white/50 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0 z-10"
+          className="absolute top-2.5 right-2.5 p-2.5 active:bg-white/70 rounded-lg transition-all min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0 z-10 touch-manipulation"
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >
           {isOpen ? (
@@ -177,15 +177,15 @@ export default function Sidebar() {
 
         {/* Profile section - horizontal layout: image left, text right */}
         <motion.div
-          className="flex items-start flex-row gap-4"
+          className="flex items-start flex-row gap-3"
           transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         >
           {/* Avatar - grows when expanded, always on left */}
           <motion.div
-            className="rounded-full bg-gray-100 flex items-center justify-center shadow-md relative overflow-hidden flex-shrink-0"
+            className="rounded-full bg-gray-100 flex items-center justify-center shadow-sm relative overflow-hidden flex-shrink-0"
             animate={{
-              width: isOpen ? 96 : 48,
-              height: isOpen ? 96 : 48,
+              width: isOpen ? 80 : 40,
+              height: isOpen ? 80 : 40,
             }}
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
@@ -201,10 +201,10 @@ export default function Sidebar() {
 
           {/* Text section - always on right, with padding to avoid button overlap */}
           <div className={`flex-1 min-w-0 text-left ${isOpen ? "pr-12" : "pr-0"}`}>
-            <h1 className={`font-bold leading-tight transition-none break-words ${isOpen ? "text-xl" : "text-sm"}`}>
+            <h1 className={`font-bold leading-tight transition-none break-words ${isOpen ? "text-lg" : "text-sm"}`}>
               Hello, I&apos;m {personalInfo.name}.
             </h1>
-            <p className={`font-medium text-gray-800 transition-none ${isOpen ? "text-base mt-1" : "text-sm"}`}>
+            <p className={`font-medium text-gray-800 transition-none ${isOpen ? "text-sm mt-0.5" : "text-xs"}`}>
               {personalInfo.title}
             </p>
             
@@ -215,8 +215,8 @@ export default function Sidebar() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="overflow-hidden mt-2 space-y-1"
+                  transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="overflow-hidden mt-2 space-y-1.5"
                 >
                    <div className="flex items-center gap-2">
                      <div className="relative flex items-center justify-center w-3 h-3">
@@ -225,11 +225,11 @@ export default function Sidebar() {
                        {/* Inner green dot */}
                        <div className="relative w-2 h-2 bg-green-500 rounded-full z-10"></div>
                      </div>
-                     <p className="text-sm text-gray-600">{personalInfo.status}</p>
+                     <p className="text-xs text-gray-600">{personalInfo.status}</p>
                    </div>
                   <div className="flex items-center gap-2 text-gray-600">
-                    <MapPin className="w-4 h-4" />
-                    <p className="text-sm">{personalInfo.location}</p>
+                    <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                    <p className="text-xs">{personalInfo.location}</p>
                   </div>
                 </motion.div>
               )}
@@ -247,25 +247,25 @@ export default function Sidebar() {
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               className="overflow-hidden"
             >
-              <div className="pt-4 mt-4 border-t border-gray-200 space-y-3">
+              <div className="pt-4 mt-4 border-t border-gray-200/80 space-y-2.5">
                 {/* Contact Information */}
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   <a 
                     href={`tel:${personalInfo.phone}`} 
-                    className="group flex items-center gap-3 min-w-0 p-2 -mx-2 rounded-lg hover:bg-gray-100/50 transition-all duration-200"
+                    className="group flex items-center gap-3 min-w-0 p-2.5 -mx-2.5 rounded-lg active:bg-gray-100/70 transition-all duration-200 touch-manipulation min-h-[44px]"
                   >
-                    <Phone className="w-4 h-4 text-gray-500 group-hover:text-blue-600 flex-shrink-0 transition-colors duration-200" />
-                    <span className="text-sm text-gray-700 group-hover:text-blue-600 group-hover:underline truncate min-w-0 transition-all duration-200">
+                    <Phone className="w-4 h-4 text-gray-500 group-active:text-blue-600 flex-shrink-0 transition-colors duration-200" />
+                    <span className="text-sm text-gray-700 group-active:text-blue-600 truncate min-w-0 transition-all duration-200">
                       {personalInfo.phone}
                     </span>
                   </a>
                   
                   <a 
                     href={`mailto:${personalInfo.email}`} 
-                    className="group flex items-center gap-3 min-w-0 p-2 -mx-2 rounded-lg hover:bg-gray-100/50 transition-all duration-200"
+                    className="group flex items-center gap-3 min-w-0 p-2.5 -mx-2.5 rounded-lg active:bg-gray-100/70 transition-all duration-200 touch-manipulation min-h-[44px]"
                   >
-                    <Mail className="w-4 h-4 text-gray-500 group-hover:text-blue-600 flex-shrink-0 transition-colors duration-200" />
-                    <span className="text-sm text-gray-700 group-hover:text-blue-600 group-hover:underline truncate min-w-0 break-all transition-all duration-200">
+                    <Mail className="w-4 h-4 text-gray-500 group-active:text-blue-600 flex-shrink-0 transition-colors duration-200" />
+                    <span className="text-sm text-gray-700 group-active:text-blue-600 truncate min-w-0 break-all transition-all duration-200">
                       {personalInfo.email}
                     </span>
                   </a>
@@ -277,7 +277,7 @@ export default function Sidebar() {
                     ? "/api/cv"
                     : "/cv.pdf"}
                   download="CV.pdf"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-black text-white rounded-lg font-medium transition-all hover:bg-gray-800 active:scale-95 shadow-sm text-sm min-h-[44px]"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-black text-white rounded-lg font-medium transition-all active:bg-gray-800 active:scale-[0.98] shadow-sm text-sm min-h-[44px] touch-manipulation"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -287,13 +287,13 @@ export default function Sidebar() {
 
                 {/* Links Section */}
                 <div className="space-y-2">
-                  <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Links</h3>
+                  <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold px-0.5">Links</h3>
                   
                   <Link
                     href={personalInfo.socialLinks.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-2.5 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all group min-h-[44px]"
+                    className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg active:border-gray-300 active:shadow-sm transition-all group min-h-[44px] touch-manipulation"
                   >
                     <div className="flex items-center gap-3">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -301,14 +301,14 @@ export default function Sidebar() {
                       </svg>
                       <span className="text-sm font-medium">GitHub</span>
                     </div>
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-active:text-gray-600 transition-colors" />
                   </Link>
                   
                   <Link
                     href={personalInfo.socialLinks.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-2.5 bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-sm transition-all group min-h-[44px]"
+                    className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg active:border-gray-300 active:shadow-sm transition-all group min-h-[44px] touch-manipulation"
                   >
                     <div className="flex items-center gap-3">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -316,7 +316,7 @@ export default function Sidebar() {
                       </svg>
                       <span className="text-sm font-medium">LinkedIn</span>
                     </div>
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-active:text-gray-600 transition-colors" />
                   </Link>
                 </div>
               </div>
@@ -482,7 +482,7 @@ export default function Sidebar() {
       {/* Spacer for fixed header on mobile - always needed since header is always fixed */}
       <div 
         className="md:hidden"
-        style={{ height: `${headerHeight || 90}px` }}
+        style={{ height: `${headerHeight || 70}px` }}
       />
 
       {/* Desktop sidebar - always visible */}

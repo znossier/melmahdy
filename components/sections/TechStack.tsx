@@ -10,7 +10,23 @@ import SectionHeader from "@/components/ui/SectionHeader";
 export default function TechStack() {
 
   const getTechLogo = (logoName: string, techName: string) => {
-    const logoPath = `/tech-stack/${logoName.toLowerCase()}.png`;
+    // Map logo names to their actual file names and extensions
+    const logoMap: { [key: string]: { file: string; ext: string } } = {
+      h2o: { file: "h2o", ext: "png" },
+      powerbi: { file: "powerbi", ext: "png" },
+      hadoop: { file: "hadoop", ext: "png" },
+      spark: { file: "spark", ext: "png" },
+      "google-analytics": { file: "google-analytics", ext: "png" },
+      informatica: { file: "informatica", ext: "png" },
+      vscode: { file: "vs-code", ext: "png" },
+      git: { file: "git", ext: "png" },
+      jupyter: { file: "jupyter", ext: "png" },
+      "google-colab": { file: "google-colab", ext: "png" },
+    };
+
+    const logoInfo = logoMap[logoName.toLowerCase()] || { file: logoName.toLowerCase(), ext: "png" };
+    const logoPath = `/tech-stack/${logoInfo.file}.${logoInfo.ext}`;
+
     const logos: { [key: string]: { text: string; color: string; size: string } } = {
       h2o: { text: "H2O.ai", color: "text-black", size: "text-xs" },
       keras: { text: "K", color: "text-white", size: "text-lg" },
@@ -39,14 +55,14 @@ export default function TechStack() {
     return (
       <div className="relative">
         <div
-          className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center bg-white border border-gray-200 shadow-sm relative overflow-hidden flex-shrink-0"
+          className="w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-lg sm:rounded-xl flex items-center justify-center bg-white border border-gray-200 shadow-sm relative overflow-hidden flex-shrink-0"
         >
           <Image
             src={logoPath}
             alt={techName}
             width={64}
             height={64}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain p-1.5 sm:p-2"
             onError={(e) => {
               // Fallback to text if image doesn't exist
               const target = e.target as HTMLImageElement;
@@ -78,11 +94,11 @@ export default function TechStack() {
         {/* Scrolling container with hover slow-down */}
         <div className="flex animate-scroll hover:animate-scroll-slow transition-all duration-300">
           {/* First set of items */}
-          <div className="flex items-center gap-6 px-4">
+          <div className="flex items-center gap-4 sm:gap-5 md:gap-6 px-3 sm:px-4">
             {techStack.map((tech, index) => (
               <div key={`first-${index}`} className="flex flex-col items-center flex-shrink-0">
                 {getTechLogo(tech.logo, tech.name)}
-                <span className="mt-2 text-xs text-gray-600 font-medium text-center leading-tight whitespace-nowrap">
+                <span className="mt-1.5 sm:mt-2 text-xs text-gray-600 font-medium text-center leading-tight whitespace-nowrap max-w-[80px] sm:max-w-none truncate">
                   {tech.name}
                 </span>
               </div>
@@ -90,11 +106,11 @@ export default function TechStack() {
           </div>
           
           {/* Duplicate set for seamless loop */}
-          <div className="flex items-center gap-6 px-4">
+          <div className="flex items-center gap-4 sm:gap-5 md:gap-6 px-3 sm:px-4">
             {techStack.map((tech, index) => (
               <div key={`second-${index}`} className="flex flex-col items-center flex-shrink-0">
                 {getTechLogo(tech.logo, tech.name)}
-                <span className="mt-2 text-xs text-gray-600 font-medium text-center leading-tight whitespace-nowrap">
+                <span className="mt-1.5 sm:mt-2 text-xs text-gray-600 font-medium text-center leading-tight whitespace-nowrap max-w-[80px] sm:max-w-none truncate">
                   {tech.name}
                 </span>
               </div>
