@@ -5,6 +5,31 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  safelist: [
+    // Spacing - section
+    'mb-12', 'md:mb-16', 'scroll-mt-24', 'space-y-6', 'space-y-4',
+    // Spacing - card
+    'p-4', 'md:p-5', 'p-5', 'md:p-6', 'p-6', 'md:p-8', 'lg:p-10',
+    // Spacing - timeline
+    'pl-6', 'md:pl-8', '-left-[26px]', 'md:-left-[34px]',
+    // Border radius
+    'rounded-xl', 'rounded-3xl', 'rounded-full', 'rounded-lg',
+    // Background colors
+    'bg-white', 'bg-gray-50/50', 'bg-white/50', 'bg-white/80',
+    'bg-gradient-to-br', 'from-white', 'to-gray-50/50', 'to-gray-50/30',
+    'bg-blue-50', 'bg-blue-100',
+    // Border colors
+    'border-gray-200', 'border-gray-300', 'border-gray-100', 'border-gray-200/60',
+    'border-l-blue-500', 'border-l-green-500', 'border-l-purple-500', 'border-l-indigo-500', 'border-l-gray-500',
+    // Text colors
+    'text-gray-900', 'text-gray-700', 'text-gray-600', 'text-gray-500', 'text-gray-400',
+    'text-blue-600', 'text-blue-700',
+    // Hover states
+    'hover:bg-white/80', 'hover:border-gray-300', 'hover:border-gray-200', 'hover:shadow-md', 'hover:shadow-sm', 'hover:-translate-y-0.5', 'hover:-translate-y-1',
+    // Interactive
+    'cursor-pointer',
   ],
   theme: {
     extend: {
