@@ -24,9 +24,7 @@ export default function Home() {
           <About />
           
           {/* Skills Section */}
-          <div className="mb-12 md:mb-16 lg:mb-20 bg-gradient-to-br from-white to-gray-50/50 rounded-3xl p-6 md:p-8 lg:p-10 border border-gray-200/60 shadow-lg">
           <Skills />
-          </div>
           
           {/* Tech Stack Section */}
           <TechStack />

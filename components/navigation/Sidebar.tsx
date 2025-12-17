@@ -6,7 +6,8 @@ import { personalInfo, sections } from "@/data/content";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, Mail, MapPin, ExternalLink, Menu, X, User, Code, Layers, Briefcase, GraduationCap, BookOpen, Award } from "lucide-react";
+import { Phone, Mail, MapPin, ExternalLink, Menu, X } from "lucide-react";
+import { getIcon } from "@/lib/utils/icons";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -138,17 +139,9 @@ export default function Sidebar() {
     }
   };
 
-  const getIcon = (iconName: string) => {
-    const icons: { [key: string]: React.ReactNode } = {
-      User: <User className="w-4 h-4" />,
-      Code: <Code className="w-4 h-4" />,
-      Layers: <Layers className="w-4 h-4" />,
-      Briefcase: <Briefcase className="w-4 h-4" />,
-      GraduationCap: <GraduationCap className="w-4 h-4" />,
-      BookOpen: <BookOpen className="w-4 h-4" />,
-      Award: <Award className="w-4 h-4" />,
-    };
-    return icons[iconName] || <User className="w-4 h-4" />;
+  const getIconNode = (iconName: string) => {
+    const Icon = getIcon(iconName);
+    return <Icon className="w-4 h-4" />;
   };
 
   // Mobile expandable header - always fixed on mobile

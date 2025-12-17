@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { sections } from "@/data/content";
-import { User, Code, Layers, Briefcase, GraduationCap, BookOpen, Award, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { getIcon } from "@/lib/utils/icons";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,17 +72,9 @@ export default function MobileNav() {
     }
   };
 
-  const getIcon = (iconName: string) => {
-    const icons: { [key: string]: React.ReactNode } = {
-      User: <User className="w-5 h-5" />,
-      Code: <Code className="w-5 h-5" />,
-      Layers: <Layers className="w-5 h-5" />,
-      Briefcase: <Briefcase className="w-5 h-5" />,
-      GraduationCap: <GraduationCap className="w-5 h-5" />,
-      BookOpen: <BookOpen className="w-5 h-5" />,
-      Award: <Award className="w-5 h-5" />,
-    };
-    return icons[iconName] || <User className="w-5 h-5" />;
+  const getIconNode = (iconName: string) => {
+    const Icon = getIcon(iconName);
+    return <Icon className="w-5 h-5" />;
   };
 
   return (
@@ -144,7 +137,7 @@ export default function MobileNav() {
                       }`}
                     >
                       <span className={activeSection === section.id ? "text-white" : "text-gray-500"}>
-                        {getIcon(section.icon)}
+                        {getIconNode(section.icon)}
                       </span>
                       <span className="text-sm font-medium">{section.label}</span>
                     </button>

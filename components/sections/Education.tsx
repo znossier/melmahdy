@@ -5,14 +5,15 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ExpandableCard from "@/components/ui/ExpandableCard";
 import { GraduationCap } from "lucide-react";
+import { spacing } from "@/lib/constants/design";
 
 export default function Education() {
   return (
-    <section id="education" className="mb-12 md:mb-16 scroll-mt-24" aria-label="Education">
+    <section id="education" className={`${spacing.section.marginBottom} ${spacing.section.scrollMargin}`} aria-label="Education">
       <AnimatedSection>
         <SectionHeader icon={GraduationCap} label="Education" />
       </AnimatedSection>
-      <div className="space-y-4">
+      <div className={spacing.card.gap}>
         {education.map((edu, index) => (
           <AnimatedSection key={index} delay={index * 0.1}>
             <ExpandableCard
