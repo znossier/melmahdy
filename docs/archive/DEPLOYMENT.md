@@ -27,7 +27,7 @@ git push -u origin main
 
 2. **Import Project**:
    - Click "Add New Project" in the Vercel dashboard
-   - Select your repository (`moustafaelmahdy-website`)
+   - Select your repository (`melmahdy`)
    - Vercel will auto-detect Next.js settings
 
 3. **Configure Build Settings** (should be auto-detected):
@@ -48,7 +48,7 @@ git push -u origin main
 
 After deployment, update the OpenGraph URL in `app/layout.tsx`:
 
-1. Get your Vercel deployment URL (e.g., `https://moustafaelmahdy-website.vercel.app`)
+1. Get your Vercel deployment URL (e.g., `https://melmahdy.vercel.app`)
 2. Update line 20 in `app/layout.tsx`:
    ```typescript
    url: "https://your-actual-vercel-url.vercel.app", // or custom domain when configured

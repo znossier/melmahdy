@@ -8,7 +8,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 
 export default function About() {
   return (
-    <section id="about" className="mb-12 md:mb-16 scroll-mt-24" aria-label="About">
+    <section id="about" className="mb-12 md:mb-16 scroll-mt-[163px] md:scroll-mt-24" aria-label="About">
       <AnimatedSection>
         <SectionHeader icon={User} label="About" />
       </AnimatedSection>

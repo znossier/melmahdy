@@ -38,7 +38,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Think of this project structure like organizing a Figma file - everything has its place and purpose:
 
 ```
-moustafaelmahdy-website/
+melmahdy/
 ├── app/                          # Pages (like Figma pages/frames)
 │   ├── api/                      # API routes (backend functionality)
 │   │   └── cv/                   # CV download endpoint
@@ -213,6 +213,41 @@ npm start
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 - `npm run setup-auto-push` - Setup git auto-push (see `docs/archive/` for details)
+
+## Domain Redirect Setup
+
+This website includes automatic redirects from `https://moustafaelmahdy.framer.website/` to the main website.
+
+### Important Limitation
+
+Since `moustafaelmahdy.framer.website` is a Framer subdomain, **Framer controls the DNS** for this domain. This means you cannot add the DNS records (CNAME, TXT) that Vercel requires for domain verification. The redirect code is in place, but it will only work if you can get the domain verified in Vercel.
+
+### Recommended Solution: Redirect in Framer
+
+**The easiest approach is to configure the redirect within Framer itself:**
+
+1. Log into your Framer account
+2. Open the project for `moustafaelmahdy.framer.website`
+3. Go to **Site Settings** → **Custom Domain** or **Redirects**
+4. Set up a redirect from `moustafaelmahdy.framer.website` to `https://melmahdy.vercel.app`
+5. This will handle the redirect at the Framer level before traffic reaches Vercel
+
+### Alternative: Vercel Domain Configuration (If Possible)
+
+If you want to use the Vercel redirect setup, you would need to:
+
+1. **Contact Framer Support** to see if they can add custom DNS records for your subdomain
+2. Or check if Framer provides a way to configure custom DNS/CNAME records in their dashboard
+3. If DNS access is granted, add the CNAME and TXT records that Vercel provides:
+   - CNAME: `moustafaelmahdy` → `f5e66e85114fb7aa.vercel-dns-017.com.`
+   - TXT: `_vercel` → `vc-domain-verify=moustafaelmahdy.framer.website,...`
+
+### How the Code Works (If Domain is Verified)
+
+1. **Middleware Redirect** (`middleware.ts`): Automatically redirects any requests from the Framer domain to the production domain
+2. **Vercel Redirects** (`vercel.json`): Server-level redirects configured in Vercel
+
+Both use 301 (permanent redirect) which is SEO-friendly and tells search engines that the content has permanently moved.
 
 ## License
 

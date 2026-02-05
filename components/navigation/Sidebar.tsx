@@ -8,26 +8,122 @@ import { Phone, Mail, MapPin, ExternalLink, Menu, X, User, Code, Layers, Briefca
 
 import { personalInfo, sections } from "@/data/content";
 
+// Module-level lock to prevent double execution in StrictMode
+let heightUpdateLock = false;
+let activeTimeoutId: NodeJS.Timeout | null = null;
+
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [activeSection, setActiveSection] = useState("");
+  // Use sessionStorage to persist across StrictMode remounts
+  const getHasAnimated = () => {
+    if (typeof window === 'undefined') return false;
+    return sessionStorage.getItem('header-has-animated') === 'true';
+  };
+  const [hasAnimated, setHasAnimated] = useState(getHasAnimated);
   const headerRef = useRef<HTMLDivElement>(null);
   const activeSectionRef = useRef("");
+  const hasAnimatedRef = useRef(getHasAnimated()); // Initialize from sessionStorage
 
   // Update header height when open state changes or on mount
   useEffect(() => {
+    if (typeof window === 'undefined' || window.innerWidth >= 768) return;
+    
+    // Prevent double execution in StrictMode using module-level lock
+    if (heightUpdateLock) {
+      return; // Skip if another effect is already running
+    }
+    
+    heightUpdateLock = true;
+    
+    // Prevent double execution in StrictMode by using a flag
+    let isEffectActive = true;
+    
     const updateHeight = () => {
+      if (!isEffectActive) {
+        return; // Skip if effect was cleaned up
+      }
       if (headerRef.current) {
-        setHeaderHeight(headerRef.current.offsetHeight);
+        // Use getBoundingClientRect for more accurate measurement
+        const rect = headerRef.current.getBoundingClientRect();
+        const measuredHeight = Math.round(rect.height);
+        // Sanity check: reject measurements that are clearly wrong (too large)
+        // Normal header should be 70-200px, anything over 300px is likely wrong
+        if (measuredHeight > 300 && !hasAnimatedRef.current) {
+          return; // Skip this measurement
+        }
+        // Only update if height actually changed to prevent unnecessary re-renders
+        setHeaderHeight(prevHeight => {
+          if (prevHeight !== measuredHeight) {
+            return measuredHeight;
+          }
+          return prevHeight;
+        });
       }
     };
     
-    updateHeight();
-    // Also update on resize
+    // Initial measurement - skip if we just changed state (wait for animation delay instead)
+    // Only measure immediately if hasAnimated is true (instant updates)
+    if (hasAnimatedRef.current) {
+      requestAnimationFrame(() => {
+        updateHeight();
+      });
+    }
+    
+    // Measure after animation completes
+    // Longer delay for first animation, instant for subsequent (when hasAnimatedRef is true)
+    const animationDelay = hasAnimatedRef.current ? 50 : 350; // 350ms for first animation, 50ms for instant updates
+    
+    // Clear any existing timeout to prevent double execution
+    if (activeTimeoutId) {
+      clearTimeout(activeTimeoutId);
+    }
+    
+    const timeoutId = setTimeout(() => {
+      if (isEffectActive && heightUpdateLock) {
+        updateHeight();
+        activeTimeoutId = null; // Clear after execution
+      }
+    }, animationDelay);
+    
+    activeTimeoutId = timeoutId; // Track the active timeout
+    
+    // Use ResizeObserver for more accurate height tracking, but only after first animation
+    // Disable during first animation to prevent capturing intermediate states
+    let resizeObserver: ResizeObserver | null = null;
+    let resizeTimeout: NodeJS.Timeout | null = null;
+    if (headerRef.current && typeof ResizeObserver !== 'undefined' && hasAnimatedRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        // Throttle updates to prevent rapid measurements
+        if (resizeTimeout) clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          updateHeight();
+        }, 150); // Wait 150ms after resize stops
+      });
+      resizeObserver.observe(headerRef.current);
+    }
+    
+    // Also update on window resize
     window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
-  }, [isOpen]);
+    
+    return () => {
+      isEffectActive = false; // Mark effect as inactive
+      clearTimeout(timeoutId);
+      if (activeTimeoutId === timeoutId) {
+        activeTimeoutId = null; // Clear if this was the active timeout
+      }
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      window.removeEventListener('resize', updateHeight);
+      if (resizeObserver && headerRef.current) {
+        resizeObserver.unobserve(headerRef.current);
+      }
+      // Only release lock after a short delay to prevent immediate re-acquisition
+      setTimeout(() => {
+        heightUpdateLock = false;
+      }, 100);
+    };
+  }, [isOpen]); // Removed hasAnimated from deps - using ref instead to prevent double execution
 
   // Sync ref with state
   useEffect(() => {
@@ -160,11 +256,21 @@ export default function Sidebar() {
       >
       <motion.div
         className={`bg-gradient-to-br from-blue-50/40 via-white to-blue-50/20 rounded-2xl mx-2.5 mt-2 mb-2 border border-gray-200/60 shadow-md overflow-hidden relative ${isOpen ? "p-5" : "p-2.5"}`}
-        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={hasAnimatedRef.current ? { duration: 0 } : { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
       >
         {/* Menu/Close button - positioned relative to card */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => {
+            if (!hasAnimatedRef.current) {
+              hasAnimatedRef.current = true;
+              setHasAnimated(true);
+              // Persist to sessionStorage to survive StrictMode remounts
+              if (typeof window !== 'undefined') {
+                sessionStorage.setItem('header-has-animated', 'true');
+              }
+            }
+            setIsOpen(!isOpen);
+          }}
           className="absolute top-2.5 right-2.5 p-2.5 active:bg-white/70 rounded-lg transition-all min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0 z-10 touch-manipulation"
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >
@@ -177,9 +283,8 @@ export default function Sidebar() {
 
         {/* Profile section - horizontal layout: image left, text right */}
         <motion.div
-          className="flex items-start flex-row gap-4"
-          style={{ verticalAlign: "middle", height: "100%" }}
-          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          className="flex items-start flex-row gap-3"
+          transition={hasAnimatedRef.current ? { duration: 0 } : { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         >
           {/* Avatar - grows when expanded, always on left */}
           <motion.div
@@ -188,7 +293,7 @@ export default function Sidebar() {
               width: isOpen ? 80 : 40,
               height: isOpen ? 80 : 40,
             }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={hasAnimatedRef.current ? { duration: 0 } : { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <Image
               src="/memoji.png"
@@ -201,11 +306,11 @@ export default function Sidebar() {
           </motion.div>
 
           {/* Text section - always on right, with padding to avoid button overlap */}
-          <div className={`flex-1 min-w-0 text-left ${isOpen ? "pr-12" : "pr-0"}`} style={{ verticalAlign: "middle", height: "100%" }}>
-            <h1 className={`font-bold leading-tight transition-none break-words ${isOpen ? "text-lg" : "text-sm"}`} style={{ height: "fit-content" }}>
+          <div className={`flex-1 min-w-0 text-left ${isOpen ? "pr-12" : "pr-0"}`}>
+            <h1 className={`font-bold leading-tight transition-none break-words ${isOpen ? "text-lg" : "text-sm"}`}>
               Hello, I&apos;m {personalInfo.name}.
             </h1>
-            <p className={`font-medium text-gray-800 transition-none ${isOpen ? "text-sm mt-0.5" : "text-xs"}`} style={{ height: "fit-content" }}>
+            <p className={`font-medium text-gray-800 transition-none ${isOpen ? "text-sm mt-0.5" : "text-xs"}`}>
               {personalInfo.title}
             </p>
             
@@ -216,7 +321,7 @@ export default function Sidebar() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                  transition={hasAnimatedRef.current ? { duration: 0 } : { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
                   className="overflow-hidden mt-2 space-y-1.5"
                 >
                    <div className="flex items-center gap-2">
@@ -245,7 +350,7 @@ export default function Sidebar() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={hasAnimatedRef.current ? { duration: 0 } : { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
               className="overflow-hidden"
             >
               <div className="pt-4 mt-4 border-t border-gray-200/80 space-y-2.5">
